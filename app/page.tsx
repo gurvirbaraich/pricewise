@@ -1,3 +1,4 @@
+import ToastNotification from "@/components/ToastNotification";
 import TrackNow from "@/components/TrackNow";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <TrackNow />
       </div>
 
+      <ToastNotification />
       <div></div>
     </main>
   );

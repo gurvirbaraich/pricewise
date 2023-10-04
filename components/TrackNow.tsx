@@ -1,20 +1,24 @@
 "use client";
 
-import { useRef } from "react";
-import { useRouter } from 'next/navigation'
+import { useContext, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import Button from "@/components/Button";
+import { AppContext } from "@/contexts/AppContext";
 
 export default function TrackNow() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { setAppNotification } = useContext(AppContext);
 
   function initiateScrapeProductAction() {
     if (inputRef.current == null) {
       return;
     }
 
-    router.push("/product/macbook")
+    setAppNotification("Getting Product Details...");
+    // TODO: Implement product scrapping
+    // router.push("/product/macbook")
   }
 
   return (
