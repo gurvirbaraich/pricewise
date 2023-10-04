@@ -34,26 +34,26 @@ export default function ToastNotification() {
         }
       );
 
-      const fadeOutTimeoutId = setTimeout(function () {
-        timeline.fromTo(
-          toastContainerRef.current!,
-          {
-            opacity: 1,
-          },
-          {
-            opacity: 0,
-          }
-        );
-      }, 3000 * duration);
+      // const fadeOutTimeoutId = setTimeout(function () {
+      //   timeline.fromTo(
+      //     toastContainerRef.current!,
+      //     {
+      //       opacity: 1,
+      //     },
+      //     {
+      //       opacity: 0,
+      //     }
+      //   );
+      // }, 3000 * duration);
 
-      const timeoutId = setTimeout(function () {
-        setAppNotification(null);
-      }, 4000 * duration);
+      // const timeoutId = setTimeout(function () {
+      //   setAppNotification(null);
+      // }, 4000 * duration);
 
-      return () => {
-        clearTimeout(fadeOutTimeoutId);
-        clearTimeout(timeoutId);
-      }
+      // return () => {
+      //   clearTimeout(fadeOutTimeoutId);
+      //   clearTimeout(timeoutId);
+      // }
     },
     [appNotification]
   );
