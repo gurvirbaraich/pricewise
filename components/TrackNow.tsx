@@ -43,7 +43,7 @@ export default function TrackNow() {
         placeholder="Enter Product URL..."
         className="border w-full rounded px-3"
         defaultValue={
-          "https://www.flipkart.com/logitech-m171-wireless-optical-mouse/p/itmfgfwh4hqg9yhj?pid=ACCGHZ7JPMZFF4JS&lid=LSTACCGHZ7JPMZFF4JSZLPPT4&marketplace=FLIPKART&store=6bo&srno=b_1_1&otracker=browse&fm=organic&iid=en_aGwb8z1CGJ0hi8ZWt9qZ-xAeb1Mbrw4ZxL8z_rFSnBMPfQj87K6L5IN4TPC7NJCDr642wlQF3lSzsUG9jlIUKQ%3D%3D&ppt=browse&ppn=browse&ssid=9z86cmsw800000001696428784671"
+          "https://www.flipkart.com/logitech-m171-wireless-optical-mouse/p/itmfgfwh4hqg9yhj"
         }
       />
       <span className="w-36 flex justify-end">

@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import { connectToDatabase } from "@/database/connection";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -19,9 +20,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  connectToDatabase();
+  
   return (
     <html lang="en">
-      <body className={spaceGrotesk.className}>
+      <body className={spaceGrotesk.className + " bg-amber-50"}>
         <Layout>
           {children}
         </Layout>

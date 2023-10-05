@@ -2,7 +2,19 @@ import { Product } from "@/models/Product";
 import axios from "axios";
 import cheerio, { Element, CheerioAPI } from "cheerio";
 
-export default async function getAmazonProduct(productUrl: string) {
+export default async function getFlipkartProduct(productUrl: string) {
+  try {
+    const existingProduct = await Product.findOne({
+      productUrl: productUrl.split("?")[0],
+    });
+
+    if (existingProduct) {
+      return existingProduct._id;
+    }
+  } catch (error) {
+    console.error((error as { message: string }).message);
+  }
+
   const request = axios.post(
     `${process.env.BROWSERLESS_BASEPATH}${process.env.BROWSERLESS_APIKEY}`,
     {
@@ -14,14 +26,24 @@ export default async function getAmazonProduct(productUrl: string) {
   const $ = cheerio.load(contents);
 
   const productDetails = {
+    title: "",
     image: getImageDetails($),
     price: getProductPrice($),
+    productUrl: productUrl.split("?")[0],
     description: getProductDescription($),
     discountedPrice: getDiscountedPrice($),
     thumbnails: await getThumbnailImages($),
   };
 
-  const product = await Product.create(productDetails);
+  productDetails.title = productDetails.image?.alt!;
+
+  const product = await Product.findOneAndUpdate(
+    { productUrl: productDetails.productUrl },
+    {
+      $set: productDetails,
+    },
+    { upsert: true, returnDocument: "after" },
+  );
 
   return product._id;
 }
@@ -77,13 +99,13 @@ function getIndividualThumbnailImage(
 }
 
 function getProductPrice($: CheerioAPI) {
-  return $("._3I9_wc._2p6lqe").text();
+  return $("._3I9_wc._2p6lqe").text().trim();
 }
 
 function getDiscountedPrice($: CheerioAPI) {
-  return $("._30jeq3._16Jk6d").text();
+  return $("._30jeq3._16Jk6d").text().trim();
 }
 
 function getProductDescription($: CheerioAPI) {
-  return $("._1mXcCf.RmoJUa").text();
+  return $("._1mXcCf.RmoJUa").text().trim();
 }

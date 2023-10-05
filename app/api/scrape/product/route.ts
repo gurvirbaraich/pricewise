@@ -1,4 +1,4 @@
-import getAmazonProduct from "@/actions/getAmazonProduct";
+import getFlipkartProduct from "@/actions/getFlipkartProduct";
 import { connectToDatabase } from "@/database/connection";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -15,7 +15,7 @@ export const POST = async (request: NextRequest) => {
   }
   
   connectToDatabase();
-  const productId = await getAmazonProduct(productUrl);
+  const productId = await getFlipkartProduct(productUrl);
 
   return NextResponse.json({
     productId
